@@ -1,0 +1,18 @@
+* text=auto
+
+###### Git
+.gitattributes text
+.gitignore text
+.gitconfig text
+.gitmodules text
+.gitkeep text
+
+##### Global
+# Documents
+*.markdown text
+*.md text
+*.mkd text
+
+##### Language
+# Inno Setup
+*.iss
