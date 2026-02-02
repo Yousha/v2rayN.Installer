@@ -5,10 +5,10 @@
 
 #define APPLICATION_NAME "v2rayN"
 #define APPLICATION_DESCRIPTION "A V2Ray client for Windows, support Xray, v2ray and clash cores."
-#define APPLICATION_VERSION "7.12.3.0"
+#define APPLICATION_VERSION "7.17.3.0"
 #define APPLICATION_ARCHITECTURE "64bit"
-#define APPLICATION_PROCUDER "Project V"
-#define APPLICATION_COPYRIGHT "Copyright (c) 2025 Project V."
+#define APPLICATION_PRODUCER "Project V"
+#define APPLICATION_COPYRIGHT "Copyright (c) 2026 Project V."
 #define APPLICATION_CONTACT "v2ray@protonmail.com"
 #define APPLICATION_LINK "https://github.com/2dust/v2rayN"
 
@@ -21,14 +21,14 @@ AppVersion={#APPLICATION_VERSION}
 ; This directive specifies the name of the application plus its version number. The value of this directive is displayed on the welcome page of setup's wizard,
 ; and is used as the default title of the application's Add/Remove Programs entry (see UninstallDisplayName). The value may include constants.
 AppVerName={#APPLICATION_NAME}
-AppPublisher={#APPLICATION_PROCUDER}
+AppPublisher={#APPLICATION_PRODUCER}
 AppCopyright={#APPLICATION_COPYRIGHT}
 AppContact={#APPLICATION_CONTACT}
 AppPublisherURL={#APPLICATION_LINK}
 AppSupportURL={#APPLICATION_LINK}
 AppUpdatesURL={#APPLICATION_LINK}
 
-DefaultDirName={autopf}\{#APPLICATION_PROCUDER}\{#APPLICATION_NAME}
+DefaultDirName={autopf}\{#APPLICATION_PRODUCER}\{#APPLICATION_NAME}
 OutputDir=..\Artifacts
 OutputBaseFilename="{#APPLICATION_NAME} {#APPLICATION_VERSION} {#APPLICATION_ARCHITECTURE} installer"
 DirExistsWarning=yes
@@ -38,9 +38,10 @@ DefaultGroupName={#APPLICATION_NAME}
 DisableProgramGroupPage=auto
 AllowNoIcons=yes
 
-VersionInfoDescription={#APPLICATION_DESCRIPTION}
+VersionInfoDescription={#APPLICATION_NAME}: {#APPLICATION_DESCRIPTION}
 VersionInfoProductName={#APPLICATION_NAME}
-VersionInfoCompany={#APPLICATION_PROCUDER}
+VersionInfoOriginalFileName={#APPLICATION_NAME} {#APPLICATION_VERSION} {#APPLICATION_ARCHITECTURE} installer.exe
+VersionInfoCompany={#APPLICATION_PRODUCER}
 VersionInfoVersion={#APPLICATION_VERSION}
 VersionInfoProductVersion={#APPLICATION_VERSION}
 VersionInfoProductTextVersion={#APPLICATION_VERSION}
@@ -54,11 +55,11 @@ Compression=lzma
 SolidCompression=yes
 
 UninstallDisplayIcon="{app}\{#APPLICATION_NAME}.exe"
-UninstallDisplayName={#APPLICATION_NAME}
+UninstallDisplayName={#APPLICATION_PRODUCER} {#APPLICATION_NAME}
 Uninstallable=yes
 
-ArchitecturesAllowed=x64compatible
-ArchitecturesInstallIn64BitMode=x64compatible
+ArchitecturesAllowed=x86compatible and x64compatible
+ArchitecturesInstallIn64BitMode=
 
 UsePreviousSetupType=yes
 UsePreviousTasks=yes
@@ -103,13 +104,20 @@ Source: "Files\*"; DestDir: "{app}"; Excludes: ".gitkeep"; Flags: {#APPLICATION_
 ; NOTE: Don't use `Flags: ignoreversion` on any shared system files.
 
 [Icons]
-Name: "{group}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"
-Name: "{group}\{cm:UninstallProgram,{#APPLICATION_NAME}}"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; Tasks: quicklaunchicon
+Name: "{autoprograms}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"
+; Startmenu shortcut with folder.
+;Name: "{group}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"
+;Name: "{group}\{cm:UninstallProgram,{#APPLICATION_NAME}}"; Filename: "{uninstallexe}"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"
+Name: "{autodesktop}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"; Tasks: desktopicon
+
+[Icons]
+Name: "{autoprograms}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"
+; Startmenu shortcut with folder.
+;Name: "{group}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"
+;Name: "{group}\{cm:UninstallProgram,{#APPLICATION_NAME}}"; Filename: "{uninstallexe}"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"
+Name: "{autodesktop}\{#APPLICATION_NAME}"; Filename: "{app}\{#APPLICATION_NAME}.exe"; WorkingDir: "{app}"; Comment: "{#APPLICATION_DESCRIPTION}"; Tasks: desktopicon
 
 [UninstallDelete]
-Type: filesandordirs; Name: "{localappdata}\{#APPLICATION_NAME}"
-Type: filesandordirs; Name: "{commonappdata}\{#APPLICATION_NAME}"
-Type: filesandordirs; Name: "{app}\*"
+Type: filesandordirs; Name: "{localappdata}\{#APPLICATION_PRODUCER}\{#APPLICATION_NAME}"
+Type: filesandordirs; Name: "{commonappdata}\{#APPLICATION_PRODUCER}\{#APPLICATION_NAME}"
 Type: filesandordirs; Name: "{app}"
